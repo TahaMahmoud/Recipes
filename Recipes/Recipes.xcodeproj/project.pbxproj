@@ -328,8 +328,8 @@
 		0F8A18F627DF2E7C00566809 /* RecipesList */ = {
 			isa = PBXGroup;
 			children = (
-				0F8A193927DF6FC300566809 /* Model */,
 				0F8A192727DF419C00566809 /* RecipesCoordinator.swift */,
+				0F8A193927DF6FC300566809 /* Model */,
 				0F8A192427DF40C300566809 /* ViewModel */,
 				0F8A191E27DF409700566809 /* View */,
 				0F8A192527DF40CA00566809 /* Interactor */,

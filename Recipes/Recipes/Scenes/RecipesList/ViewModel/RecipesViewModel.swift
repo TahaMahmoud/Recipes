@@ -47,6 +47,8 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     
     private func fetchRecipes() {
         
+        recipes.accept([])
+        
         indicator.onNext(true)
         
         if Helper.checkConnection() {
@@ -60,40 +62,50 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     }
     
     private func fetchRemoteRecipes() {
-        recipesInteractor.fetchRemoteRecipes().subscribe{ (recipesObjects) in
-            
-            // Convert [RecipeModel] to [Recipe]
-            
-            var recipes: [Recipe] = []
-            
-            for object in recipesObjects {
-                
-                // Convert RecipeModel To Recipe
-                let recipe = Recipe(recipeID: object?.recipeID, fats: object?.fats , name: object?.name ?? "", time: object?.time ?? "", image: object?.image, weeks: object?.weeks, carbos: object?.carbos ?? "", fibers: object?.fibers ?? "", rating: object?.rating ?? 0.0, country: object?.country ?? "", ratings: object?.ratings ?? 0, calories: object?.calories ?? "", headline: object?.headline ?? "", keywords: object?.keywords ?? [], products: object?.products ?? [], proteins: object?.proteins ?? "", favorites: object?.favorites ?? 0, difficulty: object?.difficulty ?? 0, recipeDescription: object?.recipeDescription ?? "", highlighted: object?.highlighted ?? false, ingredients: object?.ingredients ?? [], incompatibilities: object?.incompatibilities ?? [], deliverableIngredients: object?.deliverableIngredients ?? [], undeliverableIngredients: object?.undeliverableIngredients ?? [])
-                
-                recipes.append(objects)
-            }
+        recipesInteractor.fetchRemoteRecipes().subscribe{ (recipes) in
 
-            
-            self.recipes.accept(recipes.element)
+            self.recipes.accept(recipes.element ?? [])
             self.indicator.onNext(false)
-            
-            self.saveRecipes(recipes: recipes.element)
+                    
+            self.saveRecipes(recipes: recipes.element ?? [])
             
         }.disposed(by: disposeBag)
     }
     
     private func fetchCachedRecipes() {
-        recipesInteractor.fetchCachedRecipes().subscribe{ (recipes) in
-            self.recipes.accept(recipes.element ?? [])
+        recipesInteractor.fetchCachedRecipes().subscribe{ (recipesObjects) in
+            
+            // Convert [RecipeModel] to [Recipe]
+            
+            var recipes: [Recipe] = []
+            
+            for object in recipesObjects.element ?? [] {
+                
+                // Convert RecipeModel to Recipe
+                recipes.append(self.recipe(recipeModel: object ?? RecipeModel()))
+            }
+            
+            self.recipes.accept(recipes)
             self.indicator.onNext(false)
-        }.disposed(by: disposeBag)
+                
+            }.disposed(by: disposeBag)
     }
     
     private func saveRecipes(recipes: [Recipe]) {
-        recipesInteractor.saveRecipes(recipes: recipes).subscribe{ (status) in
-            if error {
-                
+        
+        // Convert [Recipe] to [RecipeModel]
+
+        var recipesObjects: [RecipeModel] = []
+        
+        for recipe in recipes {
+            
+            // Convert Recipe to RecipeModel
+            recipesObjects.append(recipeModel(recipe: recipe))
+        }
+        
+        recipesInteractor.saveRecipes(recipes: recipesObjects).subscribe{ (saveSuccess) in
+            if !(saveSuccess.element ?? false) {
+                self.error.onNext("Error Occured While Saving Recipes")
             }
         }.disposed(by: disposeBag)
     }
@@ -112,6 +124,42 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             guard let recipe = recipe.element else { return }
             self?.coordinator.pushToRecipeDetails(with: recipe)
         }.disposed(by: disposeBag)
+    }
+    
+    func recipeModel(recipe: Recipe) -> RecipeModel {
+        let recipeObject = RecipeModel()
+        recipeObject.recipeID = recipe.recipeID ?? ""
+        recipeObject.fats = recipe.fats ?? ""
+        recipeObject.name = recipe.name ?? ""
+        recipeObject.time = recipe.time ?? ""
+        recipeObject.image = recipe.image ?? ""
+        recipeObject.weeks.append(objectsIn: recipe.weeks ?? [])
+        recipeObject.carbos = recipe.carbos ?? ""
+        recipeObject.fibers = recipe.fibers ?? ""
+        recipeObject.rating = recipe.rating ?? 0.0
+        recipeObject.country = recipe.country ?? ""
+        recipeObject.ratings = recipe.ratings ?? 0
+        recipeObject.calories = recipe.calories ?? ""
+        recipeObject.headline = recipe.headline ?? ""
+        recipeObject.keywords.append(objectsIn: recipe.keywords ?? [])
+        recipeObject.products.append(objectsIn: recipe.products ?? [])
+        recipeObject.proteins = recipe.proteins ?? ""
+        recipeObject.favorites = recipe.favorites ?? 0
+        recipeObject.difficulty = recipe.difficulty ?? 0
+        recipeObject.recipeDescription = recipe.recipeDescription ?? ""
+        recipeObject.highlighted = recipe.highlighted ?? false
+        recipeObject.ingredients.append(objectsIn: recipe.ingredients ?? [])
+        recipeObject.incompatibilities.append(objectsIn: recipe.incompatibilities ?? [])
+        recipeObject.deliverableIngredients.append(objectsIn: recipe.deliverableIngredients ?? [])
+        recipeObject.undeliverableIngredients.append(objectsIn: recipe.undeliverableIngredients ?? [])
+
+        return recipeObject
+    }
+    
+    func recipe(recipeModel: RecipeModel) -> Recipe {
+        let recipe = Recipe(recipeID: recipeModel.recipeID, fats: recipeModel.fats , name: recipeModel.name, time: recipeModel.time, image: recipeModel.image, weeks: Array(recipeModel.weeks), carbos: recipeModel.carbos, fibers: recipeModel.fibers, rating: recipeModel.rating , country: recipeModel.country, ratings: recipeModel.ratings , calories: recipeModel.calories, headline: recipeModel.headline, keywords: Array(recipeModel.keywords) , products: Array(recipeModel.products), proteins: recipeModel.proteins, favorites: recipeModel.favorites, difficulty: recipeModel.difficulty, recipeDescription: recipeModel.recipeDescription, highlighted: recipeModel.highlighted, ingredients: Array(recipeModel.ingredients), incompatibilities: Array(recipeModel.incompatibilities), deliverableIngredients: Array(recipeModel.deliverableIngredients), undeliverableIngredients: Array(recipeModel.undeliverableIngredients))
+
+        return recipe
     }
     
 }

@@ -10,10 +10,10 @@ import RxSwift
 
 protocol RecipesInteractorProtocol: AnyObject {
     
-    func saveRecipes(recipes: [Recipe]) -> Observable<(Bool)>
+    func fetchRemoteRecipes() -> Observable<([Recipe])>
     
-    func fetchRemoteRecipes() -> Observable<([RecipeModel])>
     func fetchCachedRecipes() -> Observable<([RecipeModel?])>
+    func saveRecipes(recipes: [RecipeModel]) -> Observable<(Bool)>
 }
 
 class RecipesInteractor: RecipesInteractorProtocol {
@@ -72,6 +72,4 @@ class RecipesInteractor: RecipesInteractorProtocol {
             return Disposables.create()
         }
     }
-
-    
 }
