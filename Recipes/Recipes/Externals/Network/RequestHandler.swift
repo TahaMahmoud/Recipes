@@ -16,9 +16,35 @@ enum ServerResponse<T> {
     case success(T), failure(Error)
 }
 
-extension RequestHandler {
+struct UploadData {
+    var data: Data
+    var fileName, mimeType, name: String
+}
 
+
+extension RequestHandler {
+    private func uploadToServerWith<T: ResponseDecoder>(_ decoder: T.Type, data: UploadData, request: URLRequestConvertible, parameters: Parameters?, progress: ((Progress) -> Void)?, completion: CallResponse<T>) {
+        AF.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(data.data, withName: data.name,fileName: data.fileName, mimeType: data.mimeType)
+            guard let parameters = parameters else { return }
+            for (key,value) in parameters {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+        }, with: request).responseJSON(completionHandler: { data in
+            print("upload finished: \(data)")
+        }).responseData { (response) in
+            switch response.result {
+            case .success(_):
+                self.handleResponse(response, completion: completion)
+            case .failure(let error):
+                completion?(ServerResponse<T>.failure(error))
+            }
+        }
+    }
+    
+    
     func cancelRequest() {
+        
         
     }
 }

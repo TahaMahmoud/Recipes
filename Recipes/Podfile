@@ -10,6 +10,8 @@ target 'Recipes' do
   pod 'Kingfisher'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'CRNotifications'
+  pod 'RealmSwift'
 
   target 'RecipesTests' do
     inherit! :search_paths
