@@ -33,7 +33,7 @@ class AppCoordinator: Coordinator {
         }
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        // let recipesListCoordinator = RecipesListCoordinator(navigationController: navigationController)
-        // coordinate(to: recipesListCoordinator)
+        let recipesListCoordinator = RecipesCoordinator(navigationController: navigationController)
+        coordinate(to: recipesListCoordinator)
     }
 }
