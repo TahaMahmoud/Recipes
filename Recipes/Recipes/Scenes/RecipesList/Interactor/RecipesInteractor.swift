@@ -13,7 +13,13 @@ protocol RecipesInteractorProtocol: AnyObject {
     func fetchRemoteRecipes() -> Observable<([Recipe])>
     
     func fetchCachedRecipes() -> Observable<([RecipeModel?])>
-    func saveRecipes(recipes: [RecipeModel]) -> Observable<(Bool)>
+    
+    func saveCachedRecipesCount(count: Int)
+    func getCachedRecipesCount() -> Int
+    
+    func saveRecipes(recipes: [RecipeModel])
+    func removeCachedRecipes()
+
 }
 
 class RecipesInteractor: RecipesInteractorProtocol {
@@ -42,28 +48,11 @@ class RecipesInteractor: RecipesInteractorProtocol {
         
     }
     
-    func saveRecipes(recipes: [RecipeModel]) -> Observable<(Bool)> {
-        return Observable.create {[weak self] (saveSuccess) -> Disposable in
-
-            do {
-                RealmManager.shared.add(recipes)
-                saveSuccess.onNext(true)
-            } catch {
-                print("Error")
-                saveSuccess.onNext(false)
-            }
-
-            return Disposables.create()
-        }
-        
-    }
-    
     func fetchCachedRecipes() -> Observable<([RecipeModel?])> {
         return Observable.create { (observer) -> Disposable in
             do {
                 let objects = RealmManager.shared.retrieveAllDataForObject(RecipeModel.self).map { $0 as? RecipeModel }
                 observer.onNext(objects)
-                
             } catch {
                 print("Error")
                 observer.onNext([])
@@ -72,4 +61,21 @@ class RecipesInteractor: RecipesInteractorProtocol {
             return Disposables.create()
         }
     }
+    
+    func saveCachedRecipesCount(count: Int) {
+        UserDefaultsManager.shared.saveInt(count, key: .cachedRecipesCounts)
+    }
+    
+    func getCachedRecipesCount() -> Int {
+        return UserDefaultsManager.shared.getInt(key: .cachedRecipesCounts) ?? 0
+    }
+
+    func saveRecipes(recipes: [RecipeModel]) {
+        RealmManager.shared.add(recipes)
+    }
+
+    func removeCachedRecipes(){
+        RealmManager.shared.deleteAllDataForObject(RecipeModel.self)
+    }
+
 }

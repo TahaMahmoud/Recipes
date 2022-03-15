@@ -43,5 +43,36 @@ struct Recipe: Codable {
         case undeliverableIngredients = "undeliverable_ingredients"
     }
     
+    func toRecipeModel() -> RecipeModel {
+        
+        let recipeObject = RecipeModel()
+        recipeObject.recipeID = self.recipeID ?? ""
+        recipeObject.fats = self.fats ?? ""
+        recipeObject.name = self.name ?? ""
+        recipeObject.time = self.time ?? ""
+        recipeObject.image = self.image ?? ""
+        recipeObject.weeks.append(objectsIn: self.weeks ?? [])
+        recipeObject.carbos = self.carbos ?? ""
+        recipeObject.fibers = self.fibers ?? ""
+        recipeObject.rating = self.rating ?? 0.0
+        recipeObject.country = self.country ?? ""
+        recipeObject.ratings = self.ratings ?? 0
+        recipeObject.calories = self.calories ?? ""
+        recipeObject.headline = self.headline ?? ""
+        recipeObject.keywords.append(objectsIn: self.keywords ?? [])
+        recipeObject.products.append(objectsIn: self.products ?? [])
+        recipeObject.proteins = self.proteins ?? ""
+        recipeObject.favorites = self.favorites ?? 0
+        recipeObject.difficulty = self.difficulty ?? 0
+        recipeObject.recipeDescription = self.recipeDescription ?? ""
+        recipeObject.highlighted = self.highlighted ?? false
+        recipeObject.ingredients.append(objectsIn: self.ingredients ?? [])
+        recipeObject.incompatibilities.append(objectsIn: self.incompatibilities ?? [])
+        recipeObject.deliverableIngredients.append(objectsIn: self.deliverableIngredients ?? [])
+        recipeObject.undeliverableIngredients.append(objectsIn: self.undeliverableIngredients ?? [])
+
+        return recipeObject
+
+    }
 }
 

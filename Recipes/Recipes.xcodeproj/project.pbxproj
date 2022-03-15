@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F43FDB827E07F14001AF1D7 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDB727E07F14001AF1D7 /* UserDefaultsKeys.swift */; };
+		0F43FDBA27E07F33001AF1D7 /* UserDetaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDB927E07F33001AF1D7 /* UserDetaultsManager.swift */; };
+		0F43FDBC27E07F48001AF1D7 /* UserDefaultsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDBB27E07F48001AF1D7 /* UserDefaultsProtocols.swift */; };
 		0F8A18B627DF23D700566809 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18B527DF23D700566809 /* AppDelegate.swift */; };
 		0F8A18B827DF23D700566809 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18B727DF23D700566809 /* SceneDelegate.swift */; };
 		0F8A18BF27DF23D800566809 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F8A18BE27DF23D800566809 /* Assets.xcassets */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		062ED35635CC534D6354D040 /* Pods_Recipes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F43FDB727E07F14001AF1D7 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		0F43FDB927E07F33001AF1D7 /* UserDetaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetaultsManager.swift; sourceTree = "<group>"; };
+		0F43FDBB27E07F48001AF1D7 /* UserDefaultsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocols.swift; sourceTree = "<group>"; };
 		0F8A18B227DF23D700566809 /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8A18B527DF23D700566809 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F8A18B727DF23D700566809 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +154,16 @@
 				AD6A6512C70851A07D84E604 /* Pods-RecipesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		0F43FDB627E07EED001AF1D7 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				0F43FDB727E07F14001AF1D7 /* UserDefaultsKeys.swift */,
+				0F43FDB927E07F33001AF1D7 /* UserDetaultsManager.swift */,
+				0F43FDBB27E07F48001AF1D7 /* UserDefaultsProtocols.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		0F8A18A927DF23D700566809 = {
@@ -303,6 +319,7 @@
 		0F8A18F227DF2E1100566809 /* DataPersistence */ = {
 			isa = PBXGroup;
 			children = (
+				0F43FDB627E07EED001AF1D7 /* UserDefaults */,
 				0F8A190527DF30F800566809 /* Realm */,
 			);
 			path = DataPersistence;
@@ -654,12 +671,15 @@
 			files = (
 				0F8A191C27DF408E00566809 /* RecipesViewController.swift in Sources */,
 				0F8A193427DF485700566809 /* Constants.swift in Sources */,
+				0F43FDB827E07F14001AF1D7 /* UserDefaultsKeys.swift in Sources */,
 				0F8A192E27DF44F200566809 /* RecipesInteractor.swift in Sources */,
 				0F8A191427DF32C000566809 /* BPCircleActivityIndicator.swift in Sources */,
+				0F43FDBA27E07F33001AF1D7 /* UserDetaultsManager.swift in Sources */,
 				0F8A193627DF49FD00566809 /* RecipeCellViewModel.swift in Sources */,
 				0F8A18FD27DF300600566809 /* Endpoint.swift in Sources */,
 				0F8A192827DF419C00566809 /* RecipesCoordinator.swift in Sources */,
 				0F8A191127DF32C000566809 /* CircleLotationSet.swift in Sources */,
+				0F43FDBC27E07F48001AF1D7 /* UserDefaultsProtocols.swift in Sources */,
 				0F8A192A27DF427D00566809 /* RecipesViewModel.swift in Sources */,
 				0F8A18FB27DF2FA200566809 /* AppCoordinator.swift in Sources */,
 				0F8A193027DF450900566809 /* RecipesRequest.swift in Sources */,

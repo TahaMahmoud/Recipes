@@ -34,6 +34,8 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     var error: PublishSubject<String> = .init()
 
     private let recipesInteractor: RecipesInteractorProtocol
+
+    private var cachedRecipesCount = 0
     
     init(recipesInteractor: RecipesInteractorProtocol = RecipesInteractor(networkManager: AlamofireManager()), coordinator: RecipesCoordinator) {
         self.recipesInteractor = recipesInteractor
@@ -66,9 +68,13 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
 
             self.recipes.accept(recipes.element ?? [])
             self.indicator.onNext(false)
-                    
-            self.saveRecipes(recipes: recipes.element ?? [])
             
+            if recipes.element?.count != self.cachedRecipesCount {
+                self.recipesInteractor.removeCachedRecipes()
+                self.saveRecipes(recipes: recipes.element ?? [])
+                self.cachedRecipesCount = recipes.element?.count ?? 0
+            }
+                        
         }.disposed(by: disposeBag)
     }
     
@@ -82,7 +88,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             for object in recipesObjects.element ?? [] {
                 
                 // Convert RecipeModel to Recipe
-                recipes.append(self.recipe(recipeModel: object ?? RecipeModel()))
+                recipes.append((object?.toRecipe())!)
             }
             
             self.recipes.accept(recipes)
@@ -100,14 +106,12 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
         for recipe in recipes {
             
             // Convert Recipe to RecipeModel
-            recipesObjects.append(recipeModel(recipe: recipe))
+            recipesObjects.append(recipe.toRecipeModel())
         }
         
-        recipesInteractor.saveRecipes(recipes: recipesObjects).subscribe{ (saveSuccess) in
-            if !(saveSuccess.element ?? false) {
-                self.error.onNext("Error Occured While Saving Recipes")
-            }
-        }.disposed(by: disposeBag)
+        recipesInteractor.saveRecipes(recipes: recipesObjects)
+        recipesInteractor.saveCachedRecipesCount(count: recipes.count)
+            
     }
     
     func recipeViewModelAtIndexPath(_ indexPath: IndexPath) -> RecipeCellViewModel {
@@ -125,41 +129,5 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             self?.coordinator.pushToRecipeDetails(with: recipe)
         }.disposed(by: disposeBag)
     }
-    
-    func recipeModel(recipe: Recipe) -> RecipeModel {
-        let recipeObject = RecipeModel()
-        recipeObject.recipeID = recipe.recipeID ?? ""
-        recipeObject.fats = recipe.fats ?? ""
-        recipeObject.name = recipe.name ?? ""
-        recipeObject.time = recipe.time ?? ""
-        recipeObject.image = recipe.image ?? ""
-        recipeObject.weeks.append(objectsIn: recipe.weeks ?? [])
-        recipeObject.carbos = recipe.carbos ?? ""
-        recipeObject.fibers = recipe.fibers ?? ""
-        recipeObject.rating = recipe.rating ?? 0.0
-        recipeObject.country = recipe.country ?? ""
-        recipeObject.ratings = recipe.ratings ?? 0
-        recipeObject.calories = recipe.calories ?? ""
-        recipeObject.headline = recipe.headline ?? ""
-        recipeObject.keywords.append(objectsIn: recipe.keywords ?? [])
-        recipeObject.products.append(objectsIn: recipe.products ?? [])
-        recipeObject.proteins = recipe.proteins ?? ""
-        recipeObject.favorites = recipe.favorites ?? 0
-        recipeObject.difficulty = recipe.difficulty ?? 0
-        recipeObject.recipeDescription = recipe.recipeDescription ?? ""
-        recipeObject.highlighted = recipe.highlighted ?? false
-        recipeObject.ingredients.append(objectsIn: recipe.ingredients ?? [])
-        recipeObject.incompatibilities.append(objectsIn: recipe.incompatibilities ?? [])
-        recipeObject.deliverableIngredients.append(objectsIn: recipe.deliverableIngredients ?? [])
-        recipeObject.undeliverableIngredients.append(objectsIn: recipe.undeliverableIngredients ?? [])
-
-        return recipeObject
-    }
-    
-    func recipe(recipeModel: RecipeModel) -> Recipe {
-        let recipe = Recipe(recipeID: recipeModel.recipeID, fats: recipeModel.fats , name: recipeModel.name, time: recipeModel.time, image: recipeModel.image, weeks: Array(recipeModel.weeks), carbos: recipeModel.carbos, fibers: recipeModel.fibers, rating: recipeModel.rating , country: recipeModel.country, ratings: recipeModel.ratings , calories: recipeModel.calories, headline: recipeModel.headline, keywords: Array(recipeModel.keywords) , products: Array(recipeModel.products), proteins: recipeModel.proteins, favorites: recipeModel.favorites, difficulty: recipeModel.difficulty, recipeDescription: recipeModel.recipeDescription, highlighted: recipeModel.highlighted, ingredients: Array(recipeModel.ingredients), incompatibilities: Array(recipeModel.incompatibilities), deliverableIngredients: Array(recipeModel.deliverableIngredients), undeliverableIngredients: Array(recipeModel.undeliverableIngredients))
-
-        return recipe
-    }
-    
+            
 }
