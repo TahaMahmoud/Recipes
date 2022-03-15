@@ -8,45 +8,36 @@
 import Foundation
 import Alamofire
 
-protocol URLRequestBuilder: URLRequestConvertible,RequestHandler {
-    var mainURL: URL { get }
-    
-    var requestURL: URL { get }
-    
+protocol Endpoint: URLRequestConvertible {
+    var baseURL: String { get }
     var path: String { get }
-    
+    var requestURL: URL { get }
     var headers: HTTPHeaders { get }
-    
     var parameters: Parameters? { get }
-    
-    var method: HTTPMethod { get }
-    
     var encoding: ParameterEncoding { get }
-    
+    var method: HTTPMethod { get }
     var urlRequest: URLRequest { get }
-    
 }
 
-extension URLRequestBuilder {
-    var mainURL: URL {
-        return URL(string: "https://api.npoint.io/43427003d33f1f6b51cc")!
+extension Endpoint {
+    var baseURL: String {
+        return "https://api.npoint.io/"
     }
     
     var requestURL: URL {
-        return mainURL.appendingPathComponent(path)
+        return URL(string: baseURL + path)!
     }
     
-    var headers: HTTPHeaders {
+    var defaultHeaders: HTTPHeaders {
         var headers = HTTPHeaders()
-        // Add Headers
-        // headers.add(HTTPHeader(name: "Key", value: "Value"))
         
+        // Add Headers
+        // headers.add(name: "Content-Type", value: "application/json")
         return headers
     }
     
-    
     var defaultParams: Parameters {
-        var param = Parameters()
+        let param = Parameters()
         return param
     }
     
@@ -62,15 +53,14 @@ extension URLRequestBuilder {
     var urlRequest: URLRequest {
         var request = URLRequest(url: requestURL)
         request.httpMethod = method.rawValue
-        for header in headers {
+        defaultHeaders.forEach { header in
             request.addValue(header.value, forHTTPHeaderField: header.name)
         }
         return request
     }
     
-    
     func asURLRequest() throws -> URLRequest {
         return try encoding.encode(urlRequest, with: parameters)
     }
-    
 }
+
