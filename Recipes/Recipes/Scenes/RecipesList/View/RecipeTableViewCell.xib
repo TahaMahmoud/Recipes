@@ -27,7 +27,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Recipe Description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqu-JV-1Rh">
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Recipe Description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqu-JV-1Rh">
                         <rect key="frame" x="145" y="48" width="237" height="82"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" red="0.54509800669999997" green="0.54509806630000002" blue="0.54509806630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

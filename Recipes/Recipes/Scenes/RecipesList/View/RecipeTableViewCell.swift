@@ -31,7 +31,7 @@ class RecipeTableViewCell: UITableViewCell {
         recipeDesc.text = viewModel.recipeDescription
         
         guard let imageURL = URL(string: viewModel.image ?? "") else {return}
-        self.recipeImage.kf.setImage(with: imageURL)
+        recipeImage.kf.setImage(with: imageURL)
 
     }
     

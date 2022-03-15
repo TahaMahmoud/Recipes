@@ -34,10 +34,7 @@ class RecipesCoordinator: Coordinator{
 
 extension RecipesCoordinator: RecipesCoordinatorProtocol {
     func pushToRecipeDetails(with recipe: Recipe) {
-        
-        print(recipe)
-        
-        // let recipeDetailsCoordinator = RecipeDetailsCoordinator(navigationController: navigationController, recipe: Recipe)
-        // recipeDetailsCoordinator.start()
+        let recipeDetailsCoordinator = RecipeDetailsCoordinator(navigationController: navigationController, recipe: recipe)
+        recipeDetailsCoordinator.start()
     }
 }

@@ -29,6 +29,11 @@ class RecipesViewController: UIViewController {
         viewModel.viewDidLoad()
         bindTableView()
 
+        setupRefershControl()
+        
+    }
+    
+    func setupRefershControl() {
         refreshControl.tintColor = .white
         if #available(iOS 10.0, *) {
             recipesTableView.refreshControl = refreshControl
