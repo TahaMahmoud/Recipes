@@ -26,8 +26,6 @@ class RecipesCoordinator: Coordinator{
         let recipesViewModel = RecipesViewModel(recipesInteractor: RecipesInteractor(), coordinator: self)
         recipesViewController.viewModel = recipesViewModel
         navigationController.navigationBar.isHidden = false
-        recipesViewController.title = "Recipes"
-        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.pushViewController(recipesViewController, animated: true)
     }
 }

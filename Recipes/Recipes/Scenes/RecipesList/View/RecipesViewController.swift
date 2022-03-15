@@ -19,6 +19,11 @@ class RecipesViewController: UIViewController {
     
     let refreshControl = UIRefreshControl()
 
+    override func viewDidAppear(_ animated: Bool) {
+        title = "Recipes"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

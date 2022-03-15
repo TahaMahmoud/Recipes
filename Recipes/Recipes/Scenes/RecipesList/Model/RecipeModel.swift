@@ -30,9 +30,11 @@ class RecipeModel: Object {
     var deliverableIngredients = List<String>()
     var undeliverableIngredients = List<String>()
  
+    @objc dynamic var isFavourited: Bool = false
+    
     func toRecipe() -> Recipe {
         
-        let recipe = Recipe(recipeID: self.recipeID, fats: self.fats , name: self.name, time: self.time, image: self.image, weeks: Array(self.weeks), carbos: self.carbos, fibers: self.fibers, rating: self.rating , country: self.country, ratings: self.ratings , calories: self.calories, headline: self.headline, keywords: Array(self.keywords) , products: Array(self.products), proteins: self.proteins, favorites: self.favorites, difficulty: self.difficulty, recipeDescription: self.recipeDescription, highlighted: self.highlighted, ingredients: Array(self.ingredients), incompatibilities: Array(self.incompatibilities), deliverableIngredients: Array(self.deliverableIngredients), undeliverableIngredients: Array(self.undeliverableIngredients))
+        let recipe = Recipe(recipeID: self.recipeID, fats: self.fats , name: self.name, time: self.time, image: self.image, weeks: Array(self.weeks), carbos: self.carbos, fibers: self.fibers, rating: self.rating , country: self.country, ratings: self.ratings , calories: self.calories, headline: self.headline, keywords: Array(self.keywords) , products: Array(self.products), proteins: self.proteins, favorites: self.favorites, difficulty: self.difficulty, recipeDescription: self.recipeDescription, highlighted: self.highlighted, ingredients: Array(self.ingredients), incompatibilities: Array(self.incompatibilities), deliverableIngredients: Array(self.deliverableIngredients), undeliverableIngredients: Array(self.undeliverableIngredients), isFavourited: self.isFavourited)
 
         return recipe
 

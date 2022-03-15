@@ -34,8 +34,10 @@ struct Recipe: Codable {
     let deliverableIngredients: [String]?
     let undeliverableIngredients: [String]?
 
+    let isFavourited: Bool?
+    
     enum CodingKeys: String, CodingKey {
-        case fats, name, time, image, weeks, carbos, fibers, rating, country, ratings, calories, headline, keywords, products, proteins, favorites, difficulty
+        case fats, name, time, image, weeks, carbos, fibers, rating, country, ratings, calories, headline, keywords, products, proteins, favorites, difficulty, isFavourited
         case recipeID = "id"
         case recipeDescription = "description"
         case highlighted, ingredients, incompatibilities
@@ -70,7 +72,8 @@ struct Recipe: Codable {
         recipeObject.incompatibilities.append(objectsIn: self.incompatibilities ?? [])
         recipeObject.deliverableIngredients.append(objectsIn: self.deliverableIngredients ?? [])
         recipeObject.undeliverableIngredients.append(objectsIn: self.undeliverableIngredients ?? [])
-
+        recipeObject.isFavourited = self.isFavourited ?? false
+        
         return recipeObject
 
     }
