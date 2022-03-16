@@ -21,7 +21,8 @@ class RecipeDataViewModel  {
     var favorites: String?
     var descriptionText: String?
     var ingredients: String?
-
+    var isFavourited: Bool?
+    
     init(recipe: Recipe) {
         
         recipeImage = recipe.image
@@ -37,6 +38,7 @@ class RecipeDataViewModel  {
         descriptionText = recipe.recipeDescription
         ingredients = recipe.ingredients?.joined(separator: ", ")
         
+        isFavourited = recipe.isFavourited
     }
     
     

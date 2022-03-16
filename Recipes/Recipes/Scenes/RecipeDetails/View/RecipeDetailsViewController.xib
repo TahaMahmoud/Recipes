@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -97,7 +98,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1Qx-Bp-Cgo">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="XBq-Il-sUs"/>
                                                                 <constraint firstAttribute="width" constant="21" id="kks-98-eyg"/>
@@ -109,7 +110,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="JR2-Ve-olw"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nD-U8-ef6">
@@ -144,7 +145,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="54O-Rp-Xfl">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="LRc-X5-MSB"/>
                                                                 <constraint firstAttribute="width" constant="21" id="oGn-72-Zcz"/>
@@ -156,7 +157,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="n3G-Fb-TMV"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmC-uL-Ne4">
@@ -191,7 +192,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="H3W-hi-y0E">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="21" id="YIS-mm-hH4"/>
                                                                 <constraint firstAttribute="height" constant="21" id="pfs-kV-2f7"/>
@@ -203,7 +204,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="b86-9O-a6z"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErY-zF-dpw">
@@ -238,7 +239,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1cD-w6-FUb">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="21" id="LKf-kv-5LL"/>
                                                                 <constraint firstAttribute="height" constant="21" id="mSS-Tu-2DL"/>
@@ -250,7 +251,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="KaF-Yx-Q0v"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPf-I7-RLU">
@@ -285,7 +286,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tGz-ll-Gfa">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="21" id="IbC-BK-xrS"/>
                                                                 <constraint firstAttribute="height" constant="21" id="h8a-kx-EK4"/>
@@ -297,7 +298,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="sLK-hl-EiG"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5m-sq-Pe3">
@@ -332,7 +333,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4TA-WC-mQG">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="M0K-cQ-edf"/>
                                                                 <constraint firstAttribute="width" constant="21" id="kFN-yu-Zcq"/>
@@ -344,7 +345,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="OIr-le-fuk"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvU-mV-EBg">
@@ -379,7 +380,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="H9b-L8-AoJ">
                                                             <rect key="frame" x="0.0" y="8.5" width="21" height="20"/>
-                                                            <color key="tintColor" systemColor="systemPinkColor"/>
+                                                            <color key="tintColor" name="AccentColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="21" id="FaU-BI-Axr"/>
                                                                 <constraint firstAttribute="height" constant="21" id="Fru-MY-hnX"/>
@@ -391,7 +392,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="aYR-gE-JYV"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                                            <color key="textColor" name="AccentColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMp-ty-kyp">
@@ -440,7 +441,7 @@
                                         <constraint firstAttribute="height" constant="25" id="JXO-1u-w47"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <color key="textColor" systemColor="systemPinkColor"/>
+                                    <color key="textColor" name="AccentColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdj-mn-FU7">
@@ -459,7 +460,7 @@
                                         <constraint firstAttribute="height" constant="25" id="XC9-Nm-a0Z"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <color key="textColor" systemColor="systemPinkColor"/>
+                                    <color key="textColor" name="AccentColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5A-fd-yNS">
@@ -525,17 +526,22 @@
             <point key="canvasLocation" x="140" y="22.488755622188908"/>
         </view>
     </objects>
+    <designables>
+        <designable name="Ejp-fc-ovT">
+            <size key="intrinsicContentSize" width="160" height="160"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="info.circle" catalog="system" width="32" height="32"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="logo" width="160" height="160"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

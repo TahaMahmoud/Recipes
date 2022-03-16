@@ -10,15 +10,24 @@ import RxSwift
 
 class RecipesViewController: UIViewController {
 
-    private let disposeBag = DisposeBag()
+    internal let disposeBag = DisposeBag()
     var viewModel: RecipesViewModel!
 
     @IBOutlet weak var recipesTableView: UITableView!
     
     @IBOutlet weak var indicator: BPCircleActivityIndicator!
     
+    var selectedRecipeID: PublishSubject<String> = .init()
+    
     let refreshControl = UIRefreshControl()
 
+    override func viewDidAppear(_ animated: Bool) {
+        title = "Recipes"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        viewModel.viewDidLoad(refresh: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +35,7 @@ class RecipesViewController: UIViewController {
         bindIndicator()
         bindErrorMessage()
         
-        viewModel.viewDidLoad()
+        // viewModel.viewDidLoad()
         bindTableView()
 
         setupRefershControl()
@@ -45,10 +54,9 @@ class RecipesViewController: UIViewController {
     }
     
     @objc private func refresh(_ sender: Any) {
-        viewModel.viewDidLoad()
+        viewModel.viewDidLoad(refresh: true)
         refreshControl.endRefreshing()
     }
-
     
     func bindIndicator() {
         viewModel.indicator.subscribe { [weak self] status in
@@ -62,8 +70,8 @@ class RecipesViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
 
-    
     func setupTableView() {
+        recipesTableView.delegate = self
         recipesTableView.registerCellNib(cellClass: RecipeTableViewCell.self)
     }
 
@@ -76,7 +84,6 @@ class RecipesViewController: UIViewController {
                 cell.configure(self.viewModel.recipeViewModelAtIndexPath(indexPath))
             }
             .disposed(by: disposeBag)
-        
         
         recipesTableView.rx.itemSelected.subscribe {[weak self]  (indexPath) in
             guard let indexPath = indexPath.element else { return }

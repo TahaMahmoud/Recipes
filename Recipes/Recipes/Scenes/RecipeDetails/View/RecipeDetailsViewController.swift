@@ -30,15 +30,15 @@ class RecipeDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionText: UITextView!
     
     @IBOutlet weak var ingredients: UITextView!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.prefersLargeTitles = false
         bindRecipeDetails()
         viewModel.viewDidLoad()
         
     }
-
+    
     func bindRecipeDetails() {
         viewModel.recipeDetails.subscribe {[weak self] (recipeData) in
             self?.renderRecipe(recipeDataViewModel: recipeData.element)
@@ -46,7 +46,13 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     func renderRecipe(recipeDataViewModel: RecipeDataViewModel?) {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName:  recipeDataViewModel?.isFavourited ?? false ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(favouriteTapped))
+        
         guard let imageURL = URL(string: recipeDataViewModel?.recipeImage ?? "") else {return}
+
+        title = recipeDataViewModel?.recipeName
+
         recipeImage.kf.setImage(with: imageURL)
 
         recipeName.text = recipeDataViewModel?.recipeName
@@ -64,4 +70,9 @@ class RecipeDetailsViewController: UIViewController {
         ingredients.text = recipeDataViewModel?.ingredients
 
     }
+    
+    @objc func favouriteTapped(sender: AnyObject) {
+        viewModel.favourite()
+    }
+    
 }

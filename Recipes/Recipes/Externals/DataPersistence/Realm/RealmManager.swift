@@ -18,7 +18,8 @@ protocol DataPersistenceManager {
     func add(_ objects : [Object])
     func add(_ object: Object)
     
-    func update(_ block: @escaping ()->Void)
+    // func update(_ block: @escaping ()->Void)
+    func update(_ object : Object.Type, with predicate: NSPredicate)
     
     func delete(_ objects : [Object])
     func delete(_ object : Object.Type, with predicate: NSPredicate)
@@ -68,10 +69,21 @@ class RealmManager: NSObject, DataPersistenceManager {
         }
     }
     
-    func update(_ block: @escaping ()->Void) {
-        try! realmObject.write(block)
-    }
+     func update(_ object : Object.Type, with predicate: NSPredicate) {
+         
+         let objects = realmObject.objects(object)
+         
+         let objectToUpdate  = objects.filter(predicate)
+
+         try! realmObject.write{
+             realmObject.add(objectToUpdate, update: .all)
+         }
+     }
     
+    /* func update(_ object : Object.Type, with predicate: NSPredicate) {
+        try! realmObject.write(block)
+    } */
+
     func delete(_ objects : [Object]) {
         try! realmObject.write{
             realmObject.delete(objects)
@@ -79,12 +91,12 @@ class RealmManager: NSObject, DataPersistenceManager {
     }
     
     func delete(_ object : Object.Type, with predicate: NSPredicate) {
-        let articles = realmObject.objects(object)
+        let objects = realmObject.objects(object)
         
-        let articlesToDelete  = articles.filter(predicate)
+        let objectToDelete  = objects.filter(predicate)
             
         try! realmObject.write {
-            realmObject.delete(articlesToDelete)
+            realmObject.delete(objectToDelete)
         }
     }
     
