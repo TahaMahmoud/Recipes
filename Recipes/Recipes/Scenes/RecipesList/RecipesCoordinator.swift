@@ -25,8 +25,7 @@ class RecipesCoordinator: Coordinator{
         let recipesViewController = RecipesViewController()
         let recipesViewModel = RecipesViewModel(recipesInteractor: RecipesInteractor(), coordinator: self)
         recipesViewController.viewModel = recipesViewModel
-        navigationController.navigationBar.isHidden = false
-        navigationController.pushViewController(recipesViewController, animated: true)
+        navigationController.setViewControllers([recipesViewController], animated: true)
     }
 }
 
