@@ -19,6 +19,8 @@ protocol RecipesInteractorProtocol: AnyObject {
     
     func saveRecipes(recipes: [RecipeModel])
     func removeCachedRecipes()
+    
+    func fetchFavourites() -> [FavouriteModel?]
 
 }
 
@@ -78,4 +80,13 @@ class RecipesInteractor: RecipesInteractorProtocol {
         RealmManager.shared.deleteAllDataForObject(RecipeModel.self)
     }
 
+    func fetchFavourites() -> [FavouriteModel?] {
+            do {
+                let objects = RealmManager.shared.retrieveAllDataForObject(FavouriteModel.self).map { $0 as? FavouriteModel }
+                return objects
+            } catch {
+                print("Error")
+                return []
+            }
+    }
 }

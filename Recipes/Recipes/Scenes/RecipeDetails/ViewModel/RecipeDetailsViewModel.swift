@@ -16,6 +16,7 @@ protocol RecipeDetailsViewModelOutput {
 
 protocol RecipeDetailsViewModelInput {
     func viewDidLoad()
+    func favourite()
 }
 
 class RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewModelOutput {
@@ -44,4 +45,19 @@ class RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewMode
         let recipeData = RecipeDataViewModel(recipe: recipe)
         recipeDetails.onNext(recipeData)
     }
+    
+    func favourite() {
+        if recipe.isFavourited ?? false {
+            recipeDetailsInteractor.unfavouriteRecipe(recipeID: recipe.recipeID ?? "")
+            recipe.isFavourited = false
+            loadRecipeDetails()
+        } else {
+            let recipeToUnfavourited = FavouriteModel()
+            recipeToUnfavourited.recipeID = recipe.recipeID ?? ""
+            recipeDetailsInteractor.favouriteRecipe(favouriteModel: recipeToUnfavourited)
+            recipe.isFavourited = true
+            loadRecipeDetails()
+        }
+    }
+
 }

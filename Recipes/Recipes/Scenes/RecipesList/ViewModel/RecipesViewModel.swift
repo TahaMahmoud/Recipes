@@ -18,7 +18,7 @@ protocol RecipesViewModelOutput {
 }
 
 protocol RecipesViewModelInput {
-    func viewDidLoad()
+    func viewDidLoad(refresh: Bool)
     func didSelectItemAtIndexPath(_ indexPath: IndexPath)
 }
 
@@ -36,6 +36,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     private let recipesInteractor: RecipesInteractorProtocol
 
     private var cachedRecipesCount = 0
+    private var favouriteRecipes: [String:Bool] = [:]
     
     init(recipesInteractor: RecipesInteractorProtocol = RecipesInteractor(networkManager: AlamofireManager()), coordinator: RecipesCoordinator) {
         self.recipesInteractor = recipesInteractor
@@ -43,23 +44,58 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
         bindSelectedRecipe()
     }
     
-    func viewDidLoad(){
-        fetchRecipes()
+    func viewDidLoad(refresh: Bool){
+        fetchFavourites()
+        fetchRecipes(refresh: refresh)
     }
     
-    private func fetchRecipes() {
+    private func fetchFavourites() {
+        favouriteRecipes.removeAll()
         
-        recipes.accept([])
-        
-        indicator.onNext(true)
-        
-        if Helper.checkConnection() {
-            fetchRemoteRecipes()
-        } else {
-            // Fetch Cached Recipes
-            fetchCachedRecipes()
-            error.onNext("Check Internet Connection")
+        let fetchedFavourites = recipesInteractor.fetchFavourites()
+
+        // Add Favourits to favourites dictionary
+        for fav in fetchedFavourites {
+            // Add RecipeID to dictionary as a key
+            self.favouriteRecipes[fav?.recipeID ?? ""] = true
         }
+            
+    }
+    
+    private func fetchRecipes(refresh: Bool) {
+
+        if recipes.value.count == 0 || refresh {
+            
+            recipes.accept([])
+            indicator.onNext(true)
+
+            if Helper.checkConnection() {
+                fetchRemoteRecipes()
+            } else {
+                // Fetch Cached Recipes
+                fetchCachedRecipes()
+                error.onNext("Check Internet Connection")
+            }
+        } else {
+            updateRecipesWithFavourite()
+        }
+    }
+    
+    private func updateRecipesWithFavourite() {
+        var updatedRecipes: [Recipe] = []
+        
+        for fetchedRecipe in recipes.value {
+            var recipe = fetchedRecipe
+            
+            if let _ = self.favouriteRecipes[fetchedRecipe.recipeID ?? ""] {
+                // Key exist -> recipe is favourited
+                recipe.isFavourited = true
+            }
+            
+            updatedRecipes.append(recipe)
+        }
+        
+        recipes.accept(updatedRecipes)
         
     }
     
@@ -69,6 +105,9 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             self.recipes.accept(recipes.element ?? [])
             self.indicator.onNext(false)
             
+            // Update Recipes with isFavourite option
+            self.updateRecipesWithFavourite()
+                    
             if recipes.element?.count != self.cachedRecipesCount {
                 self.recipesInteractor.removeCachedRecipes()
                 self.saveRecipes(recipes: recipes.element ?? [])
@@ -83,15 +122,19 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             
             // Convert [RecipeModel] to [Recipe]
             
-            var recipes: [Recipe] = []
+            var cachedrecipes: [Recipe] = []
             
             for object in recipesObjects.element ?? [] {
                 
                 // Convert RecipeModel to Recipe
-                recipes.append((object?.toRecipe())!)
+                cachedrecipes.append((object?.toRecipe())!)
             }
             
-            self.recipes.accept(recipes)
+            self.recipes.accept(cachedrecipes)
+            
+            // Update Recipes with isFavourite option
+            self.updateRecipesWithFavourite()
+            
             self.indicator.onNext(false)
                 
             }.disposed(by: disposeBag)
@@ -123,7 +166,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
         navigateToItemDetails.onNext(recipe)
     }
     
-    func bindSelectedRecipe() {
+    private func bindSelectedRecipe() {
         navigateToItemDetails.asObservable().subscribe { [weak self] (recipe) in
             guard let recipe = recipe.element else { return }
             self?.coordinator.pushToRecipeDetails(with: recipe)

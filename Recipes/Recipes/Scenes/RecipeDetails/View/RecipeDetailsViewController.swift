@@ -38,15 +38,7 @@ class RecipeDetailsViewController: UIViewController {
         viewModel.viewDidLoad()
         
     }
-
-    func setupNavbar(isFavourited: Bool) {
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName:  isFavourited ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(favouriteTapped))
-    }
     
-    @objc func favouriteTapped(sender: AnyObject) {
-        print("Favourite Tapped")
-    }
-
     func bindRecipeDetails() {
         viewModel.recipeDetails.subscribe {[weak self] (recipeData) in
             self?.renderRecipe(recipeDataViewModel: recipeData.element)
@@ -55,7 +47,7 @@ class RecipeDetailsViewController: UIViewController {
     
     func renderRecipe(recipeDataViewModel: RecipeDataViewModel?) {
         
-        setupNavbar(isFavourited: recipeDataViewModel?.isFavourited ?? false)
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName:  recipeDataViewModel?.isFavourited ?? false ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(favouriteTapped))
         
         guard let imageURL = URL(string: recipeDataViewModel?.recipeImage ?? "") else {return}
 
@@ -78,4 +70,9 @@ class RecipeDetailsViewController: UIViewController {
         ingredients.text = recipeDataViewModel?.ingredients
 
     }
+    
+    @objc func favouriteTapped(sender: AnyObject) {
+        viewModel.favourite()
+    }
+    
 }

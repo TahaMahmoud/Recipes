@@ -34,7 +34,7 @@ struct Recipe: Codable {
     let deliverableIngredients: [String]?
     let undeliverableIngredients: [String]?
 
-    let isFavourited: Bool?
+    var isFavourited: Bool?
     
     enum CodingKeys: String, CodingKey {
         case fats, name, time, image, weeks, carbos, fibers, rating, country, ratings, calories, headline, keywords, products, proteins, favorites, difficulty, isFavourited

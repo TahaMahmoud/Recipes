@@ -22,6 +22,8 @@ class RecipesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         title = "Recipes"
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        viewModel.viewDidLoad(refresh: false)
     }
     
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class RecipesViewController: UIViewController {
         bindIndicator()
         bindErrorMessage()
         
-        viewModel.viewDidLoad()
+        // viewModel.viewDidLoad()
         bindTableView()
 
         setupRefershControl()
@@ -50,7 +52,7 @@ class RecipesViewController: UIViewController {
     }
     
     @objc private func refresh(_ sender: Any) {
-        viewModel.viewDidLoad()
+        viewModel.viewDidLoad(refresh: true)
         refreshControl.endRefreshing()
     }
 
