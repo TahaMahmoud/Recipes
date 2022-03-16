@@ -14,12 +14,12 @@ protocol RecipesViewModelOutput {
     
     var indicator: PublishSubject<Bool> { get set }
     var error: PublishSubject<String> { get set }
-
 }
 
 protocol RecipesViewModelInput {
     func viewDidLoad(refresh: Bool)
     func didSelectItemAtIndexPath(_ indexPath: IndexPath)
+    func didFavouriteItemAtIndexPath(_ indexPath: IndexPath)
 }
 
 class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
@@ -29,10 +29,11 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     
     var recipes: BehaviorRelay<[Recipe]> = .init(value: [])
     var navigateToItemDetails: PublishSubject<Recipe> = .init()
-    
+    var favouriteItem: PublishSubject<Recipe> = .init()
+
     var indicator: PublishSubject<Bool> = .init()
     var error: PublishSubject<String> = .init()
-
+    
     private let recipesInteractor: RecipesInteractorProtocol
 
     private var cachedRecipesCount = 0
@@ -42,6 +43,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
         self.recipesInteractor = recipesInteractor
         self.coordinator = coordinator
         bindSelectedRecipe()
+        bindFavouriteRecipe()
     }
     
     func viewDidLoad(refresh: Bool){
@@ -82,6 +84,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     }
     
     private func updateRecipesWithFavourite() {
+        
         var updatedRecipes: [Recipe] = []
         
         for fetchedRecipe in recipes.value {
@@ -90,11 +93,15 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             if let _ = self.favouriteRecipes[fetchedRecipe.recipeID ?? ""] {
                 // Key exist -> recipe is favourited
                 recipe.isFavourited = true
+            } else {
+                // Key exist -> recipe is unfavourited
+                recipe.isFavourited = false
             }
             
             updatedRecipes.append(recipe)
         }
         
+        recipes.accept([])
         recipes.accept(updatedRecipes)
         
     }
@@ -165,12 +172,35 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
         let recipe = recipes.value[indexPath.row]
         navigateToItemDetails.onNext(recipe)
     }
-    
+
+    func didFavouriteItemAtIndexPath(_ indexPath: IndexPath) {
+        let recipe = recipes.value[indexPath.row]
+        favouriteItem.onNext(recipe)
+    }
+
     private func bindSelectedRecipe() {
         navigateToItemDetails.asObservable().subscribe { [weak self] (recipe) in
             guard let recipe = recipe.element else { return }
             self?.coordinator.pushToRecipeDetails(with: recipe)
         }.disposed(by: disposeBag)
     }
+    
+    private func bindFavouriteRecipe() {
+        favouriteItem.asObservable().subscribe { [weak self] (recipe) in
+            guard let recipe = recipe.element else { return }
             
+            if recipe.isFavourited ?? false {
+                self?.recipesInteractor.unfavouriteRecipe(recipeID: recipe.recipeID ?? "")
+            } else {
+                let favouriteModel = FavouriteModel()
+                favouriteModel.recipeID = recipe.recipeID ?? ""
+                
+                self?.recipesInteractor.favouriteRecipe(favouriteModel: favouriteModel)
+            }
+            
+            self?.viewDidLoad(refresh: false)
+
+        }.disposed(by: disposeBag)
+    }
+
 }

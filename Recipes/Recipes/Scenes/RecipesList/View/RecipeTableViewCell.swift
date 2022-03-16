@@ -15,6 +15,8 @@ class RecipeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var recipeImage: CornerRadiusImage!
     
+    var isFavourite: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,7 +34,8 @@ class RecipeTableViewCell: UITableViewCell {
         
         guard let imageURL = URL(string: viewModel.image ?? "") else {return}
         recipeImage.kf.setImage(with: imageURL)
-
+        
+        isFavourite = viewModel.isFavourite ?? false
     }
     
 }

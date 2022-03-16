@@ -21,6 +21,9 @@ protocol RecipesInteractorProtocol: AnyObject {
     func removeCachedRecipes()
     
     func fetchFavourites() -> [FavouriteModel?]
+    
+    func favouriteRecipe(favouriteModel: FavouriteModel)
+    func unfavouriteRecipe(recipeID: String)
 
 }
 
@@ -81,12 +84,22 @@ class RecipesInteractor: RecipesInteractorProtocol {
     }
 
     func fetchFavourites() -> [FavouriteModel?] {
-            do {
-                let objects = RealmManager.shared.retrieveAllDataForObject(FavouriteModel.self).map { $0 as? FavouriteModel }
-                return objects
-            } catch {
-                print("Error")
+        do {
+            let objects = RealmManager.shared.retrieveAllDataForObject(FavouriteModel.self).map { $0 as? FavouriteModel }
+            return objects
+        } catch {
+            print("Error")
                 return []
-            }
+        }
     }
+        
+    func favouriteRecipe(favouriteModel: FavouriteModel) {
+        RealmManager.shared.add(favouriteModel)
+    }
+    
+    func unfavouriteRecipe(recipeID: String) {
+        let predicate = NSPredicate(format: "recipeID == %@", recipeID)
+        RealmManager.shared.delete(FavouriteModel.self, with: predicate)
+    }
+
 }
