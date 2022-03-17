@@ -10,6 +10,13 @@ Using [api.npoint.io](https://api.npoint.io/43427003d33f1f6b51cc)
 pod install
 ```
 
+## Login
+
+Use this data to try Login feature 
+
+- use `taha.nagy06@gmail.com` for email field.
+- and use `123456` for password.
+
 ## Used In The APP
 
 - SWIFT
