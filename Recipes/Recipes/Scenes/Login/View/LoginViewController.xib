@@ -138,9 +138,9 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RFk-tu-1PP" customClass="CustomButton" customModule="Recipes" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RFk-tu-1PP" customClass="CustomButton" customModule="Recipes" customModuleProvider="target">
                             <rect key="frame" x="25" y="423" width="325" height="45"/>
-                            <color key="backgroundColor" red="0.049358926710000001" green="0.3050126433" blue="0.77209782599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.049358926710000001" green="0.3050126433" blue="0.77209782599999999" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="jCv-ay-YtA"/>
                             </constraints>
@@ -182,6 +182,9 @@
                             <state key="normal" title="Process To The App.">
                                 <color key="titleColor" red="0.64493864769999998" green="0.67018562559999995" blue="0.70287841559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="processPressed:" destination="-1" eventType="touchUpInside" id="ifA-UH-tUW"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

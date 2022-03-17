@@ -20,6 +20,8 @@ protocol LoginViewModelInput {
     
     func validateEmail(email: String)
     func validatePassword(password: String)
+    
+    func processPressed()
 }
 
 class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
@@ -29,8 +31,12 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
         
     private let loginInteractor: LoginInteractorProtocol
 
-    var validEmail: PublishSubject<Bool> = .init()
-    var validPassword: PublishSubject<Bool> = .init()
+    var validEmail: BehaviorRelay<Bool> = .init(value: false)
+    var validPassword: BehaviorRelay<Bool> = .init(value: false)
+    
+    var error: PublishSubject<String> = .init()
+    
+    var loginEnabled: PublishSubject<Bool> = .init()
     
     init(loginInteractor: LoginInteractorProtocol = LoginInteractor(), coordinator: LoginCoordinator) {
         self.loginInteractor = loginInteractor
@@ -43,6 +49,23 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     
     func login(email: String, password: String) {
         
+        if email == "" || password == "" {
+            error.onNext("Email and Password couldn't be empty")
+        } else {
+            loginInteractor.login(email: email.lowercased(), password: password.lowercased()).subscribe { (isValidCredentials) in
+                if isValidCredentials.element ?? false {
+                    self.coordinator.pushToRecipes()
+                } else {
+                    self.error.onNext("Wrong Email or Password")
+                }
+                
+                }.disposed(by: disposeBag)
+        }
+        
+    }
+    
+    func processPressed() {
+        self.coordinator.pushToRecipes()
     }
              
     func validateEmail(email: String) {
@@ -51,19 +74,31 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         
         if emailPred.evaluate(with: email) {
-            validEmail.onNext(true)
+            validEmail.accept(true)
         } else {
-            validEmail.onNext(false)
+            validEmail.accept(false)
         }
+        
+        enableLogin()
     }
     
     func validatePassword(password: String) {
         
         if password.count >= 6 {
-            validPassword.onNext(true)
+            validPassword.accept(true)
         } else {
-            validPassword.onNext(false)
+            validPassword.accept(false)
         }
+        
+        enableLogin()
+
     }
 
+    private func enableLogin() {
+        if validEmail.value && validPassword.value {
+            loginEnabled.onNext(true)
+        } else {
+            loginEnabled.onNext(false)
+        }
+    }
 }

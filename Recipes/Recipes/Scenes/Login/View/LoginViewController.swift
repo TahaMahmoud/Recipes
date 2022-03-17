@@ -22,16 +22,28 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: CustomButton!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        // Bind Data from View to ViewModel
         bindValidEmail()
         bindValidPassword()
         
+        // Bind Data from ViewModel To View
         bindEmailField()
         bindPasswordField()
+        
+        bindLoginEnabled()
+        bindErrorMessages()
+        
     }
 
     @IBAction func signInPressed(_ sender: Any) {
         viewModel.login(email: emailTF.text ?? "", password: passwordTF.text ?? "")
+    }
+    
+    @IBAction func processPressed(_ sender: Any) {
+        viewModel.processPressed()
     }
     
     private func bindEmailField() {
@@ -74,4 +86,22 @@ class LoginViewController: UIViewController {
 
     }
 
+    private func bindLoginEnabled() {
+        viewModel.loginEnabled.asObservable().subscribe { isLoginEnabled in
+            if isLoginEnabled.element ?? false {
+                self.loginButton.isEnabled = true
+                self.loginButton.backgroundColor = self.loginButton.backgroundColor?.withAlphaComponent(1)
+            } else {
+                self.loginButton.isEnabled = false
+                self.loginButton.backgroundColor = self.loginButton.backgroundColor?.withAlphaComponent(0.2)
+            }
+        }.disposed(by: disposeBag)
+    }
+    
+    private func bindErrorMessages() {
+        viewModel.error.asObservable().subscribe { errorMessage in
+            Helper.showErrorNotification(message: errorMessage)
+        }.disposed(by: disposeBag)
+    }
+    
 }

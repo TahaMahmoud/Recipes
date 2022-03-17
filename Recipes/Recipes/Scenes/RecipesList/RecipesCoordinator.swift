@@ -10,6 +10,8 @@ import UIKit
 
 protocol RecipesCoordinatorProtocol: AnyObject {
     func pushToRecipeDetails(with recipe: Recipe)
+    
+    func pushToLogin()
 }
 
 class RecipesCoordinator: Coordinator{
@@ -34,4 +36,10 @@ extension RecipesCoordinator: RecipesCoordinatorProtocol {
         let recipeDetailsCoordinator = RecipeDetailsCoordinator(navigationController: navigationController, recipe: recipe)
         recipeDetailsCoordinator.start()
     }
+    
+    func pushToLogin() {
+        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        loginCoordinator.start()
+    }
+    
 }

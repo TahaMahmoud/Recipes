@@ -26,7 +26,7 @@ class LoginCoordinator: Coordinator{
         let loginViewModel = LoginViewModel(loginInteractor: LoginInteractor(), coordinator: self)
         loginViewController.viewModel = loginViewModel
         navigationController.navigationBar.isHidden = true
-        navigationController.pushViewController(loginViewController, animated: true)
+        navigationController.setViewControllers([loginViewController], animated: true)
     }
 }
 

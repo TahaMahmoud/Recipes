@@ -33,7 +33,10 @@ class RecipeDetailsViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
+        
         bindRecipeDetails()
         viewModel.viewDidLoad()
         
@@ -47,7 +50,7 @@ class RecipeDetailsViewController: UIViewController {
     
     func renderRecipe(recipeDataViewModel: RecipeDataViewModel?) {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName:  recipeDataViewModel?.isFavourited ?? false ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(favouriteTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName:  recipeDataViewModel?.isFavourited ?? false ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(favouritePressed))
         
         guard let imageURL = URL(string: recipeDataViewModel?.recipeImage ?? "") else {return}
 
@@ -71,7 +74,7 @@ class RecipeDetailsViewController: UIViewController {
 
     }
     
-    @objc func favouriteTapped(sender: AnyObject) {
+    @objc func favouritePressed(sender: AnyObject) {
         viewModel.favourite()
     }
     
