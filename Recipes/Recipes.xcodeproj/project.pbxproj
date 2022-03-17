@@ -210,7 +210,6 @@
 			children = (
 				0F4A889B27E08CD70034D51B /* RecipeDetailsViewModel.swift */,
 				0F4A88A327E0B46B0034D51B /* RecipeDataViewModel.swift */,
-				0F906DC427E1CC540087FA86 /* FavouriteModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -416,6 +415,7 @@
 				0F4A889727E08CB30034D51B /* RecipeDetailsCoordinator.swift */,
 				0F4A889927E08CC70034D51B /* RecipeDetailsInteractor.swift */,
 				0F4A88A527E0B4810034D51B /* ViewModel */,
+				0F906DC427E1CC540087FA86 /* FavouriteModel.swift */,
 			);
 			path = RecipeDetails;
 			sourceTree = "<group>";
