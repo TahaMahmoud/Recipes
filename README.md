@@ -19,7 +19,7 @@ pod install
 - RxSwift, RxCocoa For Data Binding
 - Kingfisher For Images Downloading and Caching
 - XIB Files
-- Realm For Caching Preferred Articles using [Generic Realm Manager] 
+- Realm For Caching Favourite Recipes using [Generic Realm Manager] 
 - UserDefaults for Storing simple data using [Generic UserDefaults Manager]
 - Adobe XD For Designing The UI
 
