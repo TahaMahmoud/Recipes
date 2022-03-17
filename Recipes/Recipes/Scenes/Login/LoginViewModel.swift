@@ -54,6 +54,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
         } else {
             loginInteractor.login(email: email.lowercased(), password: password.lowercased()).subscribe { (isValidCredentials) in
                 if isValidCredentials.element ?? false {
+                    
                     self.coordinator.pushToRecipes()
                 } else {
                     self.error.onNext("Wrong Email or Password")

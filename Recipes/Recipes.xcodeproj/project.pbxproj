@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F17261A27E3533700505A7A /* LoginInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17261927E3533700505A7A /* LoginInteractorMock.swift */; };
+		0F17261C27E3543F00505A7A /* LoginCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17261B27E3543F00505A7A /* LoginCoordinatorMock.swift */; };
 		0F43FDB827E07F14001AF1D7 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDB727E07F14001AF1D7 /* UserDefaultsKeys.swift */; };
 		0F43FDBA27E07F33001AF1D7 /* UserDetaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDB927E07F33001AF1D7 /* UserDetaultsManager.swift */; };
 		0F43FDBC27E07F48001AF1D7 /* UserDefaultsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F43FDBB27E07F48001AF1D7 /* UserDefaultsProtocols.swift */; };
@@ -21,7 +23,7 @@
 		0F8A18B827DF23D700566809 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18B727DF23D700566809 /* SceneDelegate.swift */; };
 		0F8A18BF27DF23D800566809 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F8A18BE27DF23D800566809 /* Assets.xcassets */; };
 		0F8A18C227DF23D800566809 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F8A18C027DF23D800566809 /* LaunchScreen.storyboard */; };
-		0F8A18CD27DF23D900566809 /* RecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18CC27DF23D900566809 /* RecipesTests.swift */; };
+		0F8A18CD27DF23D900566809 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18CC27DF23D900566809 /* LoginViewModelTests.swift */; };
 		0F8A18D727DF23D900566809 /* RecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18D627DF23D900566809 /* RecipesUITests.swift */; };
 		0F8A18D927DF23D900566809 /* RecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18D827DF23D900566809 /* RecipesUITestsLaunchTests.swift */; };
 		0F8A18F927DF2F0B00566809 /* UITableView+RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A18F827DF2F0B00566809 /* UITableView+RegisterCell.swift */; };
@@ -81,6 +83,8 @@
 
 /* Begin PBXFileReference section */
 		062ED35635CC534D6354D040 /* Pods_Recipes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F17261927E3533700505A7A /* LoginInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorMock.swift; sourceTree = "<group>"; };
+		0F17261B27E3543F00505A7A /* LoginCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorMock.swift; sourceTree = "<group>"; };
 		0F43FDB727E07F14001AF1D7 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		0F43FDB927E07F33001AF1D7 /* UserDetaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetaultsManager.swift; sourceTree = "<group>"; };
 		0F43FDBB27E07F48001AF1D7 /* UserDefaultsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocols.swift; sourceTree = "<group>"; };
@@ -98,7 +102,7 @@
 		0F8A18C127DF23D800566809 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F8A18C327DF23D800566809 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Recipes/Common/Configuration/Info.plist; sourceTree = SOURCE_ROOT; };
 		0F8A18C827DF23D900566809 /* RecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0F8A18CC27DF23D900566809 /* RecipesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTests.swift; sourceTree = "<group>"; };
+		0F8A18CC27DF23D900566809 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		0F8A18D227DF23D900566809 /* RecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8A18D627DF23D900566809 /* RecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITests.swift; sourceTree = "<group>"; };
 		0F8A18D827DF23D900566809 /* RecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -186,6 +190,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		0F17261627E3520F00505A7A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0F8A18CC27DF23D900566809 /* LoginViewModelTests.swift */,
+				0F17261927E3533700505A7A /* LoginInteractorMock.swift */,
+				0F17261B27E3543F00505A7A /* LoginCoordinatorMock.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0F17261727E3522600505A7A /* RecipesList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RecipesList;
+			sourceTree = "<group>";
+		};
+		0F17261827E3522D00505A7A /* RecipeDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RecipeDetails;
+			sourceTree = "<group>";
+		};
 		0F43FDB627E07EED001AF1D7 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,7 +277,9 @@
 		0F8A18CB27DF23D900566809 /* RecipesTests */ = {
 			isa = PBXGroup;
 			children = (
-				0F8A18CC27DF23D900566809 /* RecipesTests.swift */,
+				0F17261827E3522D00505A7A /* RecipeDetails */,
+				0F17261727E3522600505A7A /* RecipesList */,
+				0F17261627E3520F00505A7A /* Login */,
 			);
 			path = RecipesTests;
 			sourceTree = "<group>";
@@ -788,7 +818,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F8A18CD27DF23D900566809 /* RecipesTests.swift in Sources */,
+				0F17261A27E3533700505A7A /* LoginInteractorMock.swift in Sources */,
+				0F8A18CD27DF23D900566809 /* LoginViewModelTests.swift in Sources */,
+				0F17261C27E3543F00505A7A /* LoginCoordinatorMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
