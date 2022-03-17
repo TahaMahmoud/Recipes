@@ -26,7 +26,7 @@ protocol RecipesViewModelInput {
 
 class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     
-    private let coordinator: RecipesCoordinator
+    private let coordinator: RecipesCoordinatorProtocol
     let disposeBag = DisposeBag()
     
     var recipes: BehaviorRelay<[Recipe]> = .init(value: [])
@@ -41,7 +41,7 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
     private var cachedRecipesCount = 0
     private var favouriteRecipes: [String:Bool] = [:]
     
-    init(recipesInteractor: RecipesInteractorProtocol = RecipesInteractor(networkManager: AlamofireManager()), coordinator: RecipesCoordinator) {
+    init(recipesInteractor: RecipesInteractorProtocol = RecipesInteractor(networkManager: AlamofireManager()), coordinator: RecipesCoordinatorProtocol) {
         self.recipesInteractor = recipesInteractor
         self.coordinator = coordinator
         bindSelectedRecipe()

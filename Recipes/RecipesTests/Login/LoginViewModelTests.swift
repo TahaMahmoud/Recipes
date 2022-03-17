@@ -13,14 +13,14 @@ import RxSwift
 class LoginViewModelTests: XCTestCase {
 
     var sut: LoginViewModel!
-    var interactorMock: LoginInteractorMock!
+    var interactorMock: LoginInteractor!
     var coordinatorMock: LoginCoordinatorMock!
     
     var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
     
-        interactorMock = LoginInteractorMock()
+        interactorMock = LoginInteractor()
         coordinatorMock = LoginCoordinatorMock()
         
         sut = LoginViewModel(loginInteractor: interactorMock, coordinator: coordinatorMock)
@@ -60,33 +60,96 @@ class LoginViewModelTests: XCTestCase {
     }
     
     func testLoginEmptyEmail() {
+
+        let expectation = self.expectation(description: #function)
+        let recorder = Recorder<String>()
+        recorder.on(valueSubject: sut.error)
+        
         sut.login(email: "", password: "")
-        
-        sut.error.subscribe { error in
-            XCTAssertEqual(error.element, "Email and Password couldn't be empty")
-        }.disposed(by: disposeBag)
-        
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 2)
+        XCTAssertEqual(recorder.items.last, "Email and Password couldn't be empty")
+
     }
     
     func testLoginWithWrongCredentials() {
         
-        sut.login(email: "taha@taha.com", password: "123456")
+        let expectation = self.expectation(description: #function)
+        let recorder = Recorder<String>()
+        recorder.on(valueSubject: sut.error)
         
-        sut.error.subscribe { error in
-            XCTAssertEqual(error.element, "Wrong Email or Password")
-        }.disposed(by: disposeBag)
+        sut.login(email: "taha@taha.com", password: "123456")
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 2)
+        XCTAssertEqual(recorder.items.last, "Wrong Email or Password")
 
     }
     
     func testLoginWithCorrectCredentials() {
-        
         sut.login(email: "taha.nagy06@gmail.com", password: "123456")
+        XCTAssertEqual(coordinatorMock.isLoginDone, true)
+    }
+    
+    func testProceesPressed() {
+        sut.processPressed()
+        XCTAssertEqual(coordinatorMock.isLoginDone, true)
+    }
+    
+    func testEnableLoginFail() {
         
-        sut.error.subscribe { error in
-            XCTAssertEqual(error.element, "Wrong Email or Password")
-        }.disposed(by: disposeBag)
+        let expectation = self.expectation(description: #function)
+        let recorder = Recorder<Bool>()
+        recorder.on(valueSubject: sut.loginEnabled)
+
+        // Given
+        sut.validEmail.accept(true)
+        sut.validPassword.accept(false)
+        
+        // Do
+        sut.enableLogin()
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 2)
+        
+        // Test
+        XCTAssertEqual(recorder.items.last, false)
 
     }
 
-    
+    func testEnableLoginSuccess() {
+        
+        let expectation = self.expectation(description: #function)
+        let recorder = Recorder<Bool>()
+        recorder.on(valueSubject: sut.loginEnabled)
+
+        // Given
+        sut.validEmail.accept(true)
+        sut.validPassword.accept(true)
+        
+        // Do
+        sut.enableLogin()
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 2)
+        
+        // Test
+        XCTAssertEqual(recorder.items.last, true)
+
+    }
+
 }
+

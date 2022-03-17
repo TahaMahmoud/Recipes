@@ -10,15 +10,14 @@ import RxSwift
 
 @testable import Recipes
 
-class LoginCoordinatorMock: LoginCoordinator {
+class LoginCoordinatorMock: LoginCoordinatorProtocol {
+        
+    var isLoginDone = false
     
-    init() {
-        super.init(navigationController: UINavigationController())
+    func pushToRecipes() {
+        // Simulate Navigation
+        isLoginDone = true
     }
     
-    override func start() {
-
-    }
-
 }
 
