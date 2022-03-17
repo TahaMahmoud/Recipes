@@ -23,14 +23,16 @@ class RecipesViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         title = "Recipes"
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        addLogoutButton()
         viewModel.viewDidLoad(refresh: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTableView()
         bindIndicator()
         bindErrorMessage()
@@ -40,6 +42,16 @@ class RecipesViewController: UIViewController {
 
         setupRefershControl()
         
+    }
+    
+    func addLogoutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:  UIImage(systemName: "power"), style: .done, target: self, action: #selector(logoutPressed))
+        
+        navigationItem.rightBarButtonItem?.tintColor = .red
+    }
+    
+    @objc func logoutPressed() {
+        viewModel.logoutPressed()
     }
     
     func setupRefershControl() {

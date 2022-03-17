@@ -20,6 +20,8 @@ protocol RecipesViewModelInput {
     func viewDidLoad(refresh: Bool)
     func didSelectItemAtIndexPath(_ indexPath: IndexPath)
     func didFavouriteItemAtIndexPath(_ indexPath: IndexPath)
+    
+    func logoutPressed()
 }
 
 class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
@@ -201,6 +203,10 @@ class RecipesViewModel: RecipesViewModelInput, RecipesViewModelOutput {
             self?.viewDidLoad(refresh: false)
 
         }.disposed(by: disposeBag)
+    }
+    
+    func logoutPressed() {
+        coordinator.pushToLogin()
     }
 
 }
