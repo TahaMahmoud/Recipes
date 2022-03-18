@@ -12,7 +12,7 @@ protocol LoginCoordinatorProtocol: AnyObject {
     func pushToRecipes()
 }
 
-class LoginCoordinator: Coordinator{
+class LoginCoordinator: Coordinator {
     
     unowned let navigationController: UINavigationController
     
