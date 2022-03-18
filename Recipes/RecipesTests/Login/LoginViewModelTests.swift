@@ -51,7 +51,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testValidateEmailSuccess() {
-        sut.validateEmail(email: "taha.nagy06@gmail.com")
+        sut.validateEmail(email: "taha@taha.com")
         XCTAssertEqual(sut.validEmail.value, true)
     }
 
@@ -100,7 +100,7 @@ class LoginViewModelTests: XCTestCase {
     }
     
     func testLoginWithCorrectCredentials() {
-        sut.login(email: "taha.nagy06@gmail.com", password: "123456")
+        sut.login(email: "taha@taha.com", password: "123456")
         XCTAssertEqual(coordinatorMock.isLoginDone, true)
     }
     

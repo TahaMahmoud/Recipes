@@ -45,7 +45,7 @@ class LoginInteractorTests: XCTestCase {
         
         let expectation = self.expectation(description: #function)
         let recorder = Recorder<Bool>()
-        recorder.on(valueObservable: sut.login(email: "taha.nagy06@gmail.com", password: "1234560"))
+        recorder.on(valueObservable: sut.login(email: "taha@taha.com", password: "1234560"))
             
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             expectation.fulfill()
@@ -75,7 +75,7 @@ class LoginInteractorTests: XCTestCase {
         
         let expectation = self.expectation(description: #function)
         let recorder = Recorder<Bool>()
-        recorder.on(valueObservable: sut.login(email: "taha.nagy06@gmail.com", password: "123456"))
+        recorder.on(valueObservable: sut.login(email: "taha@taha.com", password: "123456"))
             
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             expectation.fulfill()
