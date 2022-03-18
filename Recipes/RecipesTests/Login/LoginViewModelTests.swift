@@ -39,6 +39,12 @@ class LoginViewModelTests: XCTestCase {
         
     }
 
+    func testInit() {
+        XCTAssertNotNil(interactorMock)
+        XCTAssertNotNil(coordinatorMock)
+        XCTAssertNotNil(sut)
+    }
+    
     func testValidateEmailFail() {
         sut.validateEmail(email: "taha")
         XCTAssertEqual(sut.validEmail.value, false)

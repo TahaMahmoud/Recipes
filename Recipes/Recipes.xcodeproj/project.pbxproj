@@ -58,8 +58,13 @@
 		0F906DD027E209790087FA86 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F906DCF27E209790087FA86 /* LoginViewModel.swift */; };
 		0F906DD227E209830087FA86 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F906DD127E209830087FA86 /* LoginInteractor.swift */; };
 		0F906DD427E214A20087FA86 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F906DD327E214A20087FA86 /* CustomButton.swift */; };
+		0F9940AB27E4724F00ADDDBB /* RecipesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9940AA27E4724F00ADDDBB /* RecipesListViewModelTests.swift */; };
+		0F9940AD27E472CA00ADDDBB /* RecipesInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9940AC27E472CA00ADDDBB /* RecipesInteractorMock.swift */; };
+		0F9940AF27E4732E00ADDDBB /* RecipesCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9940AE27E4732E00ADDDBB /* RecipesCoordinatorMock.swift */; };
+		0F9940B127E4745A00ADDDBB /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9940B027E4745A00ADDDBB /* StubGenerator.swift */; };
+		0F9940B427E4752300ADDDBB /* Recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F9940B327E4752300ADDDBB /* Recipes.json */; };
 		0FDF7E1027E3AA1600F8D001 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDF7E0F27E3AA1600F8D001 /* Recorder.swift */; };
-		0FDF7E1227E3AD1900F8D001 /* TestLoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDF7E1127E3AD1900F8D001 /* TestLoginInteractor.swift */; };
+		0FDF7E1227E3AD1900F8D001 /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDF7E1127E3AD1900F8D001 /* LoginInteractorTests.swift */; };
 		270BBA3DE04ED4C86CDE0E5F /* Pods_Recipes_RecipesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECDC5A2BACB36CB644462CE /* Pods_Recipes_RecipesUITests.framework */; };
 		A996EA5FF96A8574B85D52B9 /* Pods_RecipesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29213F6AE437C4AABD6AAD7 /* Pods_RecipesTests.framework */; };
 		F4767D1621E84081A137699D /* Pods_Recipes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062ED35635CC534D6354D040 /* Pods_Recipes.framework */; };
@@ -139,8 +144,13 @@
 		0F906DCF27E209790087FA86 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0F906DD127E209830087FA86 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		0F906DD327E214A20087FA86 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		0F9940AA27E4724F00ADDDBB /* RecipesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewModelTests.swift; sourceTree = "<group>"; };
+		0F9940AC27E472CA00ADDDBB /* RecipesInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesInteractorMock.swift; sourceTree = "<group>"; };
+		0F9940AE27E4732E00ADDDBB /* RecipesCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesCoordinatorMock.swift; sourceTree = "<group>"; };
+		0F9940B027E4745A00ADDDBB /* StubGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
+		0F9940B327E4752300ADDDBB /* Recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Recipes.json; sourceTree = "<group>"; };
 		0FDF7E0F27E3AA1600F8D001 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
-		0FDF7E1127E3AD1900F8D001 /* TestLoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginInteractor.swift; sourceTree = "<group>"; };
+		0FDF7E1127E3AD1900F8D001 /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
 		1ECDC5A2BACB36CB644462CE /* Pods_Recipes_RecipesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipes_RecipesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		250A67CDF44E9514F322697F /* Pods-Recipes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipes.debug.xcconfig"; path = "Target Support Files/Pods-Recipes/Pods-Recipes.debug.xcconfig"; sourceTree = "<group>"; };
 		3DFAA6DB77931B34FC572ED1 /* Pods-Recipes-RecipesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipes-RecipesUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recipes-RecipesUITests/Pods-Recipes-RecipesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,7 +207,7 @@
 			children = (
 				0F8A18CC27DF23D900566809 /* LoginViewModelTests.swift */,
 				0F17261B27E3543F00505A7A /* LoginCoordinatorMock.swift */,
-				0FDF7E1127E3AD1900F8D001 /* TestLoginInteractor.swift */,
+				0FDF7E1127E3AD1900F8D001 /* LoginInteractorTests.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -205,6 +215,11 @@
 		0F17261727E3522600505A7A /* RecipesList */ = {
 			isa = PBXGroup;
 			children = (
+				0F9940B327E4752300ADDDBB /* Recipes.json */,
+				0F9940AA27E4724F00ADDDBB /* RecipesListViewModelTests.swift */,
+				0F9940AC27E472CA00ADDDBB /* RecipesInteractorMock.swift */,
+				0F9940AE27E4732E00ADDDBB /* RecipesCoordinatorMock.swift */,
+				0F9940B027E4745A00ADDDBB /* StubGenerator.swift */,
 			);
 			path = RecipesList;
 			sourceTree = "<group>";
@@ -653,6 +668,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F9940B427E4752300ADDDBB /* Recipes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,8 +838,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F8A18CD27DF23D900566809 /* LoginViewModelTests.swift in Sources */,
-				0FDF7E1227E3AD1900F8D001 /* TestLoginInteractor.swift in Sources */,
+				0FDF7E1227E3AD1900F8D001 /* LoginInteractorTests.swift in Sources */,
+				0F9940AD27E472CA00ADDDBB /* RecipesInteractorMock.swift in Sources */,
+				0F9940B127E4745A00ADDDBB /* StubGenerator.swift in Sources */,
 				0F17261C27E3543F00505A7A /* LoginCoordinatorMock.swift in Sources */,
+				0F9940AB27E4724F00ADDDBB /* RecipesListViewModelTests.swift in Sources */,
+				0F9940AF27E4732E00ADDDBB /* RecipesCoordinatorMock.swift in Sources */,
 				0FDF7E1027E3AA1600F8D001 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@ import RxSwift
 
 @testable import Recipes
 
-class TestLoginInteractor: XCTestCase {
+class LoginInteractorTests: XCTestCase {
 
     var sut: LoginInteractor!
     
