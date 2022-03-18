@@ -14,7 +14,7 @@ protocol LoginInteractorProtocol: AnyObject {
 
 class LoginInteractor: LoginInteractorProtocol {
     
-    let credentials: [String : String] = ["email": "taha.nagy06@gmail.com", "password": "123456"]
+    let credentials: [String : String] = ["email": "taha@taha.com", "password": "123456"]
     
     func login(email: String, password: String) -> Observable<Bool> {
         return Observable.create {[weak self] (isValidCredential) -> Disposable in

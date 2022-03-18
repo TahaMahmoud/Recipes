@@ -21,7 +21,7 @@ protocol RecipeDetailsViewModelInput {
 
 class RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewModelOutput {
     
-    private let coordinator: RecipeDetailsCoordinator
+    private let coordinator: RecipeDetailsCoordinatorProtocol
     let disposeBag = DisposeBag()
     
     var recipeDetails: PublishSubject<RecipeDataViewModel> = .init()
@@ -31,7 +31,7 @@ class RecipeDetailsViewModel: RecipeDetailsViewModelInput, RecipeDetailsViewMode
     
     private let recipeDetailsInteractor: RecipeDetailsInteractorProtocol
 
-    init(recipeDetailsInteractor: RecipeDetailsInteractorProtocol = RecipeDetailsInteractor(), coordinator: RecipeDetailsCoordinator, recipe: Recipe) {
+    init(recipeDetailsInteractor: RecipeDetailsInteractorProtocol = RecipeDetailsInteractor(), coordinator: RecipeDetailsCoordinatorProtocol, recipe: Recipe) {
         self.recipeDetailsInteractor = recipeDetailsInteractor
         self.coordinator = coordinator
         self.recipe = recipe

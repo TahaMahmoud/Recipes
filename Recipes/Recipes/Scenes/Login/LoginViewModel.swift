@@ -26,7 +26,7 @@ protocol LoginViewModelInput {
 
 class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     
-    private let coordinator: LoginCoordinator
+    private let coordinator: LoginCoordinatorProtocol
     let disposeBag = DisposeBag()
         
     private let loginInteractor: LoginInteractorProtocol
@@ -38,7 +38,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     
     var loginEnabled: PublishSubject<Bool> = .init()
     
-    init(loginInteractor: LoginInteractorProtocol = LoginInteractor(), coordinator: LoginCoordinator) {
+    init(loginInteractor: LoginInteractorProtocol = LoginInteractor(), coordinator: LoginCoordinatorProtocol) {
         self.loginInteractor = loginInteractor
         self.coordinator = coordinator
     }
@@ -54,6 +54,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
         } else {
             loginInteractor.login(email: email.lowercased(), password: password.lowercased()).subscribe { (isValidCredentials) in
                 if isValidCredentials.element ?? false {
+                    
                     self.coordinator.pushToRecipes()
                 } else {
                     self.error.onNext("Wrong Email or Password")
@@ -94,7 +95,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
 
     }
 
-    private func enableLogin() {
+    internal func enableLogin() {
         if validEmail.value && validPassword.value {
             loginEnabled.onNext(true)
         } else {
