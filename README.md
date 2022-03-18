@@ -14,7 +14,7 @@ pod install
 
 Use this data to try Login feature 
 
-- use `taha.nagy06@gmail.com` for email field.
+- use `taha@taha.com` for email field.
 - and use `123456` for password.
 
 ## Used In The APP
